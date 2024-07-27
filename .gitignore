@@ -1,0 +1,51 @@
+# Maven build output
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+# Maven-specific files
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# NetBeans specific files
+nbproject/private/
+nbbuild/
+nbdist/
+nbactions.xml
+
+# IDE-specific files
+.idea/
+*.iml
+*.iws
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Other temporary files
+*.tmp
+*.swp
+*.swo
+
+# Dependency directories
+lib/
+
+# Configuration files that might contain sensitive information
+*.properties
+*.xml
+
+# Other editor specific files
+*.sublime-workspace
+*.sublime-project
