@@ -5,7 +5,9 @@
 package ec.edu.espol.adivinar;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  *
@@ -26,7 +28,7 @@ public class Node<E> {
         return left==null && right==null;
     }
     
-    public List<Node<E>> childrenNodesData(){
+    public List<Node<E>> childrenNodesList(){
         
         List<Node<E>> childrenNodes = new ArrayList<>();
         
@@ -35,11 +37,11 @@ public class Node<E> {
             return childrenNodes;
         }
         if(this.left!= null){
-            childrenNodes.addAll(this.left.childrenNodesData());
+            childrenNodes.addAll(this.left.childrenNodesList());
         }
         
         if(this.right!= null){
-            childrenNodes.addAll(this.right.childrenNodesData());
+            childrenNodes.addAll(this.right.childrenNodesList());
         }
         
         return childrenNodes;
@@ -49,5 +51,45 @@ public class Node<E> {
     public String toString() {
         return "Node{" + "data=" + data + '}';
     }
-     
+    
+    public void addChildrenQuestion(String question){
+       // List<Node<E>> childrenNodes = childrenNodesList();
+        //for (Node<E> node : childrenNodes){
+        if(this.isLeaf()){
+            this.left = new Node(question);
+            this.right = new Node(question);
+        }
+        else{
+            this.left.addChildrenQuestion(question);
+            this.right.addChildrenQuestion(question);
+            
+        }
+        //}
+    }
+    /*
+    public void addChildrenQuestion(String question){
+        if(this==null){
+            return;
+        }
+        
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.add(this);
+        
+        while(!queue.isEmpty()){
+            int levelSize = queue.size();
+            
+            for(int i=0; i < levelSize; i++){
+                Node<E> node = queue.poll();
+                node.addQuestion(question);
+            }
+        }
+            
+    }
+    */
+    
+    public void addQuestion(String question){
+        Node<String> node = new Node(question);
+        this.left = (Node<E>) node;
+        this.right = (Node<E>) node;
+    }
 }
