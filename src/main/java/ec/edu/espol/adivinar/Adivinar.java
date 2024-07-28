@@ -19,40 +19,20 @@ public class Adivinar {
 
     public static void main(String[] args) {
         
-        // Node<String> node1 = new Node("Es mamifero");
-         Node<String> node1 = cargarArchivoPreguntas();
-        
-        Node<String> nodeOso = new Node("Oso");
-        Node<String> nodeVenado = new Node("Venado");
-        Node<String> nodeLechuza = new Node("Lechuza");
-        Node<String> nodePaloma = new Node("Paloma");
-        
-        /*
-        node1.left = new Node("Es carnivoro?");
-        node1.right = new Node("Es carnivoro?");
-        node1.left.left = new Node("Se para en cuatro patas?");
-        node1.left.right = new Node("Se para en cuatro patas?");
-        node1.right.left = new Node("Se para en cuatro patas?");
-        node1.right.right = new Node("Se para en cuatro patas?");
-        */
-        
-        node1.left.left.left = nodeOso;
-        node1.left.right.left = nodeVenado;
-        node1.right.left.right = nodeLechuza;
-        node1.right.right.right = nodePaloma;
-        
-        
+        Node<String> node1 = cargarArchivoPreguntas();
+        cargarArchivoRespuestas(node1);
+                 
         System.out.println("Piense un animal.");
         Scanner sc = new Scanner(System.in);
         System.out.print("Numero de preguntas: ");
         
         int n;
+        
         do{
             n = sc.nextInt();
         } while(n<0);
         
         preguntar(node1, n);
-        
         
     }
         
@@ -96,7 +76,7 @@ public class Adivinar {
             return res;   
             
     }
-        
+   
     
     public static <E> Node<String> cargarArchivoPreguntas(){
              
@@ -120,7 +100,20 @@ public class Adivinar {
         
     }
     
-    public void cargarArchivoRespuestas(){
+    
+    public static void cargarArchivoRespuestas(Node<String> root){
+        Path path = Paths.get("respuestas.txt");
+        
+        try{
+            List<String> questions = Files.readAllLines(path);
+            for(String question : questions){
+                root.addChildrenAnswer(question);
+            }
+            
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
         
     }
     

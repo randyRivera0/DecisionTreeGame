@@ -5,6 +5,7 @@
 package ec.edu.espol.adivinar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -91,5 +92,35 @@ public class Node<E> {
         Node<String> node = new Node(question);
         this.left = (Node<E>) node;
         this.right = (Node<E>) node;
+    }
+
+    public void addChildrenAnswer(String question) {
+        String[] tokens = question.split(" ");
+        String answer = tokens[0];
+        String[] path = Arrays.copyOfRange(tokens, 1, tokens.length);
+        
+        Node<E> current = this;
+        
+        boolean negativo;
+        for(int i=0; i<path.length-1; i++){
+            String step = path[i];
+            negativo = step.equals("no");
+            if (!negativo){
+                current = current.left;
+            }
+            else{
+                current = current.right;
+            }
+        }
+        String step = path[path.length-1];
+        negativo = step.equals("no");
+        if (!negativo){
+                current.left = new Node(answer);
+        }
+        else{
+            current.right = new Node(answer);
+        }
+        
+        
     }
 }
